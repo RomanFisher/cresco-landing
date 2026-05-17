@@ -1,0 +1,1120 @@
+/* =========================================
+   1. ДИЗАЙН-СИСТЕМА ТА БАЗА
+   ========================================= */
+:root {
+    --bg-light: #F7F4F0;
+    --bg-dark: #151515;
+    --accent-bordeaux: #6C1D2A;
+    --accent-gold: #C0A062;
+    --text-dark: #222222;
+    --text-muted: #666666;
+    --text-light: #F7F4F0;
+    --accent-gold: #C0A062; 
+    
+    --font-sans: 'Montserrat', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding { padding: 80px 0; }
+
+/* Універсальні заголовки секцій */
+.section-label { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+.section-label.center { justify-content: center; }
+.section-label .line { width: 30px; height: 1px; background-color: var(--accent-bordeaux); }
+.section-label p { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+
+.section-title { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 40px; }
+.section-title.center { text-align: center; }
+.accent-italic { font-style: italic; color: var(--accent-bordeaux); }
+.accent-gold { font-style: italic; color: var(--accent-gold); }
+
+/* Темні секції (Портфоліо, Футер) */
+.dark-section {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+.dark-section .section-title { color: var(--text-light); }
+.dark-section .section-label p { color: #aaaaaa; }
+
+/* =========================================
+   2. КНОПКИ ТА НАВІГАЦІЯ (ХЕДЕР)
+   ========================================= */
+a { text-decoration: none; }
+button { font-family: inherit; }
+
+.header { position: fixed; top: 0; left: 0; width: 100%; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background-color: rgba(247, 244, 240, 0.95); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.header-logo { font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 2px; color: var(--text-dark); }
+.header-actions { display: flex; align-items: center; gap: 15px; }
+
+.btn-primary { background-color: var(--accent-bordeaux); color: #fff; font-size: 0.75rem; font-weight: 500; letter-spacing: 1px; padding: 12px 20px; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; }
+.btn-primary:hover { background-color: #4a131c; }
+.btn-solid { background-color: var(--bg-dark); color: var(--bg-light); font-size: 0.8rem; font-weight: 500; letter-spacing: 1px; padding: 16px 28px; text-transform: uppercase; display: inline-block; border: none; cursor: pointer; transition: 0.3s; }
+.btn-solid:hover { background-color: var(--accent-bordeaux); }
+.btn-text { color: var(--text-dark); font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; position: relative; }
+
+.lang-switch { display: flex; gap: 5px; font-size: 0.8rem; font-weight: 500; }
+.lang-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); transition: 0.3s; }
+.lang-btn.active, .lang-btn:hover { color: var(--text-dark); font-weight: 600; }
+
+/* =========================================
+   3. СЕКЦІЇ
+   ========================================= */
+/* Hero */
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+.hero-title { font-family: var(--font-serif); font-size: 3.5rem; font-weight: 400; line-height: 1.1; margin-bottom: 25px; }
+.hero-description { font-size: 1rem; color: var(--text-muted); max-width: 500px; margin-bottom: 40px; }
+.hero-buttons { display: flex; flex-direction: column; gap: 20px; }
+
+/* About */
+.about-text { font-size: 1.5rem; font-family: var(--font-serif); max-width: 800px; }
+
+/* Services */
+.services-list { display: flex; flex-direction: column; gap: 20px; }
+.service-item { background-color: #f0ebe1; padding: 30px; border-radius: 4px; transition: 0.3s; border-left: 4px solid transparent; }
+.service-item:hover { border-left-color: var(--accent-bordeaux); transform: translateX(5px); }
+.service-num { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px; display: block; }
+.service-item h3 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 10px; }
+
+/* Portfolio */
+.portfolio-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.portfolio-card { position: relative; height: 300px; background-color: #2a2a2a; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 4px; overflow: hidden; }
+.card-overlay { position: absolute; inset: 0; opacity: 0.8; transition: 0.3s; }
+.bordeaux-overlay { background: linear-gradient(to bottom right, #6C1D2A, #151515); }
+.dark-overlay { background: linear-gradient(to bottom right, #333, #111); }
+.portfolio-card:hover .card-overlay { opacity: 0.5; }
+.card-title { position: relative; font-family: var(--font-serif); font-size: 2.5rem; font-weight: 400; font-style: italic; z-index: 2; margin-bottom: 10px; }
+.card-category { position: relative; font-size: 0.75rem; letter-spacing: 2px; z-index: 2; opacity: 0.8; }
+
+/* Testimonials */
+.testimonial-card { background-color: #fff; padding: 40px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+.test-quote { font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; margin-bottom: 30px; color: var(--text-dark); }
+.test-author { display: flex; align-items: center; gap: 15px; }
+.author-avatar { width: 50px; height: 50px; background-color: var(--accent-bordeaux); color: #fff; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-family: var(--font-serif); font-size: 1.2rem; }
+.author-name { font-weight: 600; font-size: 0.9rem; }
+.author-role { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Footer */
+.footer-desc { max-width: 500px; margin: 0 auto 40px; color: #aaaaaa; }
+.footer-buttons { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-bottom: 60px; }
+.btn-gold { background-color: #C0A062; color: #151515; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; padding: 16px 28px; text-transform: uppercase; border: none; cursor: pointer; }
+.btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); font-size: 0.8rem; letter-spacing: 1px; padding: 15px 28px; text-transform: uppercase; transition: 0.3s; }
+.btn-outline:hover { border-color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; }
+.footer-logo { font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 4px; margin-bottom: 10px; }
+.copyright { font-size: 0.75rem; color: #666; }
+
+/* =========================================
+   4. МОДАЛЬНЕ ВІКНО ТА АНІМАЦІЇ
+   ========================================= */
+.modal-overlay { position: fixed; inset: 0; background-color: rgba(21, 21, 21, 0.8); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.4s; }
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-container { background-color: var(--bg-light); width: 90%; max-width: 500px; padding: 40px 30px; position: relative; transform: translateY(-20px); transition: 0.4s; }
+.modal-overlay.active .modal-container { transform: translateY(0); }
+.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--text-dark); }
+.modal-title { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 30px; text-align: center; font-weight: 400; }
+.modal-form .form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
+.modal-form label { font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
+.modal-form input, .modal-form textarea { background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 10px 0; font-family: var(--font-sans); outline: none; transition: 0.3s; }
+.modal-form input:focus, .modal-form textarea:focus { border-bottom-color: var(--accent-bordeaux); }
+.modal-form .btn-solid { width: 100%; margin-top: 10px; }
+
+/* Анімація появи при скролі */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* Медіа-запити */
+@media (min-width: 768px) {
+    .header { padding: 20px 50px; }
+    .hero-title { font-size: 5rem; }
+    .hero-buttons { flex-direction: row; align-items: center; }
+    .section-padding { padding: 120px 0; }
+    .section-title { font-size: 3.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .footer-buttons { flex-direction: row; justify-content: center; gap: 30px; }
+}
+
+.marquee {
+    width: 100%;
+    background-color: var(--bg-dark); /* Темний фон, як на скріншоті */
+    overflow: hidden; /* Ховаємо все, що виходить за межі екрану */
+    padding: 15px 0; /* Вертикальні відступи */
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05); /* Ледь помітні рамки */
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.marquee-content {
+    display: flex;
+    white-space: nowrap; /* Забороняємо перенесення рядка */
+    /* Запускаємо анімацію 'scroll', яка триває 30s, рухається рівномірно і нескінченно */
+    animation: scroll 30s linear infinite; 
+}
+
+.marquee-item {
+    font-family: var(--font-sans); /* Чистий Sans-serif шрифт */
+    font-size: 0.8rem; /* Розмір для мобільного */
+    font-weight: 500;
+    letter-spacing: 2px; /* Міжбуквений інтервал */
+    text-transform: uppercase; /* Все великими літерами */
+    color: #fff; /* Білий текст */
+    padding-right: 5px; /* Невеликий відступ, щоб текст не зливався */
+}
+
+/* Ключові кадри анімації */
+@keyframes scroll {
+    from {
+        /* Починаємо з нульового зсуву */
+        transform: translateX(0);
+    }
+    to {
+        /* Зсуваємо вліво рівно на 50% від ширини всього marquee-content.
+           Оскільки контент продубльований, в цей момент анімація 
+           непомітно перестрибне на початок, створивши ілюзію зацикленості. */
+        transform: translateX(-50%);
+    }
+}
+
+/* Адаптація для десктопів */
+@media (min-width: 768px) {
+    .marquee {
+        padding: 20px 0; /* Більші відступи */
+    }
+    .marquee-item {
+        font-size: 0.9rem; /* Трохи більший шрифт */
+        letter-spacing: 3px;
+    }
+    .marquee-content {
+        animation-duration: 40s; /* На великому екрані робимо рух повільнішим для кращого читання */
+    }
+}
+
+/* Якщо користувач вимкнув анімації в системі - зупиняємо її */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+        animation: none;
+        overflow-x: auto;
+    }
+}
+
+
+/* =========================================
+   7. СЕКЦІЯ ПРО НАС (ABOUT CRESCO)
+   ========================================= */
+.about {
+    padding: 80px 0; /* Вертикальні відступи секції */
+    background-color: var(--bg-light);
+}
+
+.about-content {
+    max-width: 800px;
+}
+
+/* Спільний стиль для лейблів секцій (як ABOUT CRESCO, WHAT WE DO) */
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.section-label .line {
+    width: 30px;
+    height: 1px;
+    background-color: var(--accent-bordeaux);
+}
+.section-label span:not(.line) {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.about-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+.about-lead {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+.about-text {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 650px;
+}
+
+/* Розділювальна лінія між текстом і цифрами */
+.divider {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 50px 0;
+}
+
+/* =========================================
+   8. СТАТИСТИКА (STATS GRID)
+   ========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на мобільному */
+    gap: 40px 20px; /* Відступи між рядками 40px, між колонками 20px */
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-number {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    color: var(--accent-bordeaux);
+    line-height: 1;
+}
+
+.stat-label {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   АДАПТИВ (ПЛАНШЕТИ ТА ДЕСКТОПИ)
+   ========================================= */
+@media (min-width: 768px) {
+    .about {
+        padding: 120px 0;
+    }
+    
+    .about-title {
+        font-size: 3.5rem;
+    }
+    
+    .about-lead {
+        font-size: 2rem;
+    }
+    
+    .about-text {
+        font-size: 1.05rem;
+    }
+
+    /* На великих екранах вишиковуємо статистику в 4 колонки */
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+    
+    .stat-number {
+        font-size: 4rem;
+    }
+}
+
+/* =========================================
+   9. ПОСЛУГИ (WHAT WE DO)
+   ========================================= */
+.services {
+    padding: 60px 0;
+    background-color: var(--bg-light);
+}
+
+.services-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 50px;
+    color: var(--text-dark);
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Сама картка */
+.service-card {
+    position: relative;
+    padding: 50px 20px;
+    border-top: 1px solid rgba(0,0,0,0.1); /* Тонка лінія зверху */
+    overflow: hidden; /* Щоб фон не вилазив за межі */
+    cursor: pointer;
+}
+.service-card:last-child {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* АНІМОВАНИЙ ТЕМНИЙ ФОН (виїжджає знизу) */
+.service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0; /* Стартова висота 0 */
+    background-color: var(--bg-dark); /* Темний фон CRESCO */
+    z-index: 0;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Плавна анімація висоти */
+}
+
+/* Контент картки (має бути поверх фону) */
+.card-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-num {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    transition: color 0.4s ease;
+}
+
+.card-icon {
+    width: 45px;
+    height: 45px;
+    border: 1px solid rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    color: var(--text-dark);
+    transition: border-color 0.4s ease, color 0.4s ease;
+}
+
+.card-heading {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    transition: color 0.4s ease;
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 90%;
+    transition: color 0.4s ease;
+}
+
+/* Стрілочка внизу (схована за замовчуванням) */
+.card-arrow {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    opacity: 0; /* Невидима */
+    transform: translateX(-15px); /* Зсунута вліво */
+    transition: all 0.5s ease;
+}
+
+/* =========================================
+   СТАН АКТИВНОСТІ (ДЛЯ СКРОЛУ ТА HOVER)
+   ========================================= */
+
+/* Запускаємо заливку фону на всю висоту */
+.service-card.active::before,
+.service-card:hover::before { /* Додав hover для десктопів */
+    height: 100%;
+}
+
+/* Робимо всі тексти білими/світлими на темному фоні */
+.service-card.active .card-heading,
+.service-card:hover .card-heading {
+    color: #ffffff;
+}
+
+.service-card.active .card-desc,
+.service-card:hover .card-desc {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.service-card.active .card-num,
+.service-card:hover .card-num {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.service-card.active .card-icon,
+.service-card:hover .card-icon {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Показуємо стрілочку */
+.service-card.active .card-arrow,
+.service-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0); /* Виїжджає на своє місце */
+}
+
+/* Адаптив для десктопа */
+@media (min-width: 768px) {
+    .services-title {
+        font-size: 3.5rem;
+    }
+    .card-heading {
+        font-size: 2.2rem;
+    }
+    .service-card {
+        padding: 60px 40px; /* Більші відступи по боках */
+    }
+}
+
+/* =========================================
+   10. ПОРТФОЛІО (SELECTED WORK)
+   ========================================= */
+.portfolio {
+    background-color: var(--bg-dark);
+    color: var(--bg-light);
+    padding: 80px 0;
+}
+
+/* Лейбл для темного фону */
+.dark-label span:not(.line) {
+    color: var(--accent-gold);
+}
+.gold-line {
+    background-color: var(--accent-gold) !important;
+}
+
+/* Розташування заголовка та опису */
+.portfolio-header-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+.portfolio-title {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.accent-gold-italic {
+    font-style: italic;
+    color: var(--accent-gold);
+}
+
+.portfolio-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 300px;
+}
+
+/* =========================================
+   СІТКА КАРТОК ПОРТФОЛІО
+   ========================================= */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на мобільних */
+    gap: 15px;
+    align-items: start;
+}
+
+/* Базовий стиль картки */
+.port-card {
+    display: flex;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.port-card:hover {
+    transform: scale(0.98); /* Легке натискання при ховері */
+}
+
+/* Висота карток для ефекту кладки */
+.card-short {
+    aspect-ratio: 1.1 / 1; /* Майже квадратні */
+}
+.card-tall {
+    aspect-ratio: 0.8 / 1; /* Витягнуті вертикально */
+}
+
+/* Градієнтні заливки зі скріншотів */
+.grad-red { background: linear-gradient(135deg, #4a1520 0%, #7d1c31 100%); }
+.grad-dark { background: linear-gradient(135deg, #221517 0%, #3e121e 100%); }
+.grad-brown { background: linear-gradient(135deg, #3d2a21 0%, #5e3b2b 100%); }
+.grad-black { background: linear-gradient(135deg, #1a1a1a 0%, #261f1d 100%); }
+.grad-bordeaux { background: linear-gradient(135deg, #380c1a 0%, #15050a 100%); }
+.grad-brown2 { background: linear-gradient(135deg, #2a201b 0%, #4a3022 100%); }
+
+/* Контент всередині карток */
+.port-content {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+.center-align {
+    align-items: center;
+    text-align: center;
+}
+.bottom-align {
+    justify-content: flex-end;
+    padding-bottom: 30px;
+}
+.left-align {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.port-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+.port-title-small {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.3;
+    z-index: 2;
+}
+
+.port-cat {
+    font-family: var(--font-sans);
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+}
+
+/* Іконки в портфоліо */
+.port-icon {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.play-icon svg {
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+.circle-icon {
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 25px;
+}
+
+/* Специфічна картка Fashion (текст на задньому фоні) */
+.fashion-card {
+    position: relative;
+    overflow: hidden;
+}
+.bg-text {
+    position: absolute;
+    bottom: 5px;
+    right: -10px;
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--accent-bordeaux);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+/* =========================================
+   АДАПТИВ (ПЛАНШЕТИ ТА ДЕСКТОПИ)
+   ========================================= */
+@media (min-width: 768px) {
+    .portfolio-header-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 60px;
+    }
+    
+    .portfolio-title {
+        font-size: 4rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки на великому екрані */
+        gap: 25px;
+    }
+    
+    .port-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* =========================================
+   11. ЧОМУ МИ (WHY CRESCO)
+   ========================================= */
+.why-cresco {
+    background-color: var(--bg-light);
+    padding: 80px 0;
+    color: var(--text-dark);
+}
+
+.why-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 50px;
+}
+
+/* Список переваг */
+.reasons-list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.reason-item {
+    display: flex;
+    gap: 20px;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.reason-item:first-child {
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.reason-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(108, 29, 42, 0.3); /* Легкий бордовий контур */
+    color: var(--accent-bordeaux);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.reason-text h3 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.reason-text p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Ховер та Активний стан для списку */
+.reason-item.active .reason-icon,
+.reason-item:hover .reason-icon {
+    background-color: var(--accent-bordeaux);
+    color: #fff;
+    border-color: var(--accent-bordeaux);
+}
+
+/* =========================================
+   СІТКА ГАРАНТІЙ (КАРТКИ)
+   ========================================= */
+.guarantee-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.guarantee-card {
+    background-color: #EFEBE4; /* Трохи темніший бежевий, як на скріншоті */
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.guarantee-card.span-full {
+    grid-column: span 2; /* Перша картка на всю ширину */
+    padding: 40px 20px;
+}
+
+.g-num {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    color: var(--accent-bordeaux);
+    line-height: 1;
+    margin-bottom: 15px;
+    transition: color 0.4s ease;
+}
+
+.g-label {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.4s ease;
+}
+
+/* Ховер та Активний стан для карток */
+.guarantee-card.active,
+.guarantee-card:hover {
+    background-color: var(--accent-bordeaux);
+}
+
+.guarantee-card.active .g-num,
+.guarantee-card:hover .g-num,
+.guarantee-card.active .g-label,
+.guarantee-card:hover .g-label {
+    color: #fff;
+}
+
+/* Адаптив для планшетів та десктопів */
+@media (min-width: 768px) {
+    .why-title {
+        font-size: 3.5rem;
+    }
+    .reason-item {
+        padding: 40px 0;
+        gap: 30px;
+    }
+    .reason-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .reason-text h3 {
+        font-size: 1.6rem;
+    }
+    .guarantee-grid {
+        grid-template-columns: repeat(4, 1fr); /* На великому екрані всі в один ряд */
+    }
+    .guarantee-card.span-full {
+        grid-column: span 1; /* Знімаємо розтягування на десктопі */
+    }
+}
+
+/* =========================================
+   12. ВІДГУКИ (CLIENT STORIES) - СВІТЛА ТЕМА
+   ========================================= */
+.testimonials {
+    background-color: var(--bg-light);
+    padding: 60px 0;
+    color: var(--text-dark);
+}
+
+.testimonials-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.testimonials-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Біла картка зі скріншоту */
+.testimonial-card {
+    background-color: #ffffff;
+    padding: 35px 25px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); /* Легка преміальна тінь */
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Великі декоративні лапки */
+.quote-mark {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: #EFEBE4; /* Світло-бежевий колір для лапок */
+    line-height: 1;
+    margin-bottom: -15px;
+}
+
+/* Текст цитати - Serif Italic */
+.test-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* Блок автора */
+.test-author-block {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Кругла бордова аватарка з літерою */
+.author-avatar {
+    width: 45px;
+    height: 45px;
+    background-color: var(--accent-bordeaux);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.author-name {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.author-role {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: #A09A93; /* Приглушений сірий для професії */
+}
+
+/* П'ять зірочок */
+.stars {
+    color: #C0A062; /* Золотий колір для зірочок */
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+/* Ефект інтерактивності при скролі або ховері */
+.testimonial-card.active,
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================
+   АДАПТИВ ДЛЯ ДЕСКТОПІВ
+   ========================================= */
+@media (min-width: 768px) {
+    .testimonials-title {
+        font-size: 3.5rem;
+    }
+
+    .testimonials-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки в ряд на десктопі */
+        gap: 25px;
+    }
+}
+
+/* Контейнер для заклику до дії */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+    background-color: #151515;
+    text-align: center;
+}
+
+/* Фоновий напис CRESCO */
+.cta-watermark {
+    position: absolute;
+    font-family: var(--font-serif);
+    font-size: 26vw;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.02);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.cta-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Кнопки в один ряд на мобільному */
+.footer-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* Золота кнопка Instagram (3 рядки рядкового тексту) */
+.btn-gold {
+    background-color: #C0A062; /* Твій колір акцентного золота */
+    color: #151515;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1.3;
+    padding: 18px 20px;
+    text-align: left;
+    width: 155px;
+    height: 74px;
+    display: inline-block;
+}
+
+/* Кнопка пошти в тон сусідній */
+.btn-outline {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 155px;
+    height: 74px;
+}
+
+/* СТИЛІ ФУТЕРА (2х2 на мобільному) */
+.footer {
+    background-color: #151515;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 60px 0 30px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Робимо 2 колонки на мобільному */
+    gap: 40px 20px;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    font-size: 1.25rem;
+    letter-spacing: 4px;
+    color: #C0A062;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.footer-brand-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    max-width: 150px;
+}
+
+.footer-col-title {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.25);
+    margin-bottom: 15px;
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-col ul a, .footer-geo {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+/* Копірайт та іконки в самому низу */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    font-size: 0.7rem;
+    max-width: 60%;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 8px;
+}
+
+.social-box {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    text-decoration: none;
+}
+
+/* Адаптив для десктопу (перелаштування в 4 колонки в ряд) */
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 2fr repeat(3, 1fr);
+        gap: 30px;
+    }
+    .footer-brand-desc { max-width: 250px; }
+}
